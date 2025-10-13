@@ -1,31 +1,151 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-        <meta name="viewport" content="user-scalable=no">
-        <link rel="icon" href="icon/icon.png" type="image/png">
-        <link rel="apple-touch-icon" href="icon/icon.png">
-        <link rel="stylesheet" type="text/css" href="fonts/gamefont.css">
-        <title>Binondo Game</title>
-    </head>
-    <body style="background-color: black">
-        <script type="text/javascript" src="js/libs/pixi.js"></script>
-        <script type="text/javascript" src="js/libs/pixi-tilemap.js"></script>
-        <script type="text/javascript" src="js/libs/pixi-picture.js"></script>
-        <script type="text/javascript" src="js/libs/fpsmeter.js"></script>
-        <script type="text/javascript" src="js/libs/lz-string.js"></script>
-        <script type="text/javascript" src="js/libs/iphone-inline-video.browser.js"></script>
-        <script type="text/javascript" src="js/rpg_core.js"></script>
-        <script type="text/javascript" src="js/rpg_managers.js"></script>
-        <script type="text/javascript" src="js/rpg_objects.js"></script>
-        <script type="text/javascript" src="js/rpg_scenes.js"></script>
-        <script type="text/javascript" src="js/rpg_sprites.js"></script>
-        <script type="text/javascript" src="js/rpg_windows.js"></script>
-        <script type="text/javascript" src="js/plugins.js"></script>
-        <script type="text/javascript" src="js/main.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-		<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection"></script>
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="viewport" content="user-scalable=no" />
+    <link rel="icon" href="icon/icon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="icon/icon.png" />
+    <link rel="stylesheet" type="text/css" href="fonts/gamefont.css" />
+    <title>Binondo Game</title>
+
+    <!-- ES5/ES6 POLYFILLS (NEEDED FOR MV/NW.js) -->
+    <script>
+      // Object.entries
+      if (!Object.entries) {
+        Object.entries = function (obj) {
+          var own = Object.keys(obj),
+            i = own.length,
+            out = new Array(i);
+          while (i--) out[i] = [own[i], obj[own[i]]];
+          return out;
+        };
+      }
+
+      // Object.values (sometimes used indirectly)
+      if (!Object.values) {
+        Object.values = function (obj) {
+          var keys = Object.keys(obj),
+            out = [];
+          for (var i = 0; i < keys.length; i++) out.push(obj[keys[i]]);
+          return out;
+        };
+      }
+
+      // Array.prototype.flat
+      if (!Array.prototype.flat) {
+        Array.prototype.flat = function (depth) {
+          depth = depth === undefined ? 1 : Number(depth) || 0;
+          var result = [];
+          (function flat(arr, d) {
+            for (var i = 0; i < arr.length; i++) {
+              var v = arr[i];
+              if (Array.isArray(v) && d > 0) flat(v, d - 1);
+              else result[result.length] = v;
+            }
+          })(this, depth);
+          return result;
+        };
+      }
+
+      // Array.prototype.includes (with NaN support)
+      if (!Array.prototype.includes) {
+        Array.prototype.includes = function (search, fromIndex) {
+          var len = this.length >>> 0;
+          if (!len) return false;
+          var i = fromIndex | 0;
+          if (i < 0) i = Math.max(len + i, 0);
+          for (; i < len; i++) {
+            var el = this[i];
+            if (el === search || (el !== el && search !== search)) return true; // NaN check
+          }
+          return false;
+        };
+      }
+
+      // String.prototype.includes
+      if (!String.prototype.includes) {
+        String.prototype.includes = function (search, start) {
+          if (typeof search === 'object' && search instanceof RegExp) {
+            throw new TypeError('First argument must not be a RegExp');
+          }
+          var s = String(this);
+          var pos = start | 0;
+          if (pos < 0) pos = 0;
+          return s.indexOf(String(search), pos) !== -1;
+        };
+      }
+
+      // String.prototype.startsWith
+      if (!String.prototype.startsWith) {
+        String.prototype.startsWith = function (search, pos) {
+          var s = String(this);
+          var i = pos | 0;
+          if (i < 0) i = 0;
+          return s.substr(i, String(search).length) === String(search);
+        };
+      }
+
+      // String.prototype.endsWith
+      if (!String.prototype.endsWith) {
+        String.prototype.endsWith = function (search, length) {
+          var s = String(this);
+          var len = length === undefined ? s.length : length | 0;
+          var end = len - String(search).length;
+          if (end < 0) return false;
+          return s.indexOf(String(search), end) === end;
+        };
+      }
+    </script>
+
+    <!-- Load TensorFlow.js ONCE (core+converter+webgl) + model BEFORE MV plugins -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection"></script>
+    <script>
+      // Prefer WebGL; don't re-set if already set (avoids yellow warnings)
+      (function () {
+        try {
+          if (window.tf && tf.ready) {
+            tf.ready().then(function () {
+              if (
+                tf.getBackend &&
+                tf.setBackend &&
+                tf.getBackend() !== 'webgl'
+              ) {
+                tf.setBackend('webgl');
+              }
+            });
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+
+  <body style="background-color: black">
+    <script type="text/javascript" src="js/libs/pixi.js"></script>
+    <script type="text/javascript" src="js/libs/pixi-tilemap.js"></script>
+    <script type="text/javascript" src="js/libs/pixi-picture.js"></script>
+    <script type="text/javascript" src="js/libs/fpsmeter.js"></script>
+    <script type="text/javascript" src="js/libs/lz-string.js"></script>
+    <script
+      type="text/javascript"
+      src="js/libs/iphone-inline-video.browser.js"
+    ></script>
+    <script type="text/javascript" src="js/rpg_core.js"></script>
+    <script type="text/javascript" src="js/rpg_managers.js"></script>
+    <script type="text/javascript" src="js/rpg_objects.js"></script>
+    <script type="text/javascript" src="js/rpg_scenes.js"></script>
+    <script type="text/javascript" src="js/rpg_sprites.js"></script>
+    <script type="text/javascript" src="js/rpg_windows.js"></script>
+
+    <!-- MV loads plugins via plugins.js; our TFJS stack is already ready above -->
+    <script type="text/javascript" src="js/plugins.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+  </body>
 </html>
