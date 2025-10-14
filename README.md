@@ -93,7 +93,7 @@ Impact: Files touched / possible conflicts
 
 | Type | Case Style | Example | Notes |
 |------|------------|---------|-------|
-| **Folders** | snake_case | `bgm`, `img` 
+| **Folders** | snake_case | `bgm`, `img`, `sv_actors`
 | **JS plugins** | PascalCase | `BlinkDetector.js` 
 | **Assets (images, audio)** | snake_case | `hero_idle.png`, `bgm_forest_loop.ogg` 
 | **Assets (tilesets)** | snake_case | `A2_all_00.png`, `A5_map_00.png` 
