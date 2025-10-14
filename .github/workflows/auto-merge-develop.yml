@@ -23,8 +23,8 @@ jobs:
 
       - name: Set up Git
         run: |
-          git config user.name "Auto PR Bot"
-          git config user.email "bot@example.com"
+          git config user.name "Demonbane18"
+          git config user.email "butterncreamz@gmail.com"
 
       - name: Authenticate gh
         env:
