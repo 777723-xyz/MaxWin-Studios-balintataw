@@ -2,7 +2,7 @@ name: Merge develop into sub-branches
 
 on:
   push:
-    branches: [ develop ]
+    branches: [develop]
   workflow_dispatch: {}
 
 permissions:
