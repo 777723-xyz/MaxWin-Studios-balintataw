@@ -1,4 +1,4 @@
 [
 null,
-{"id":1,"battlerName":"Actor1_6","characterIndex":0,"characterName":"!Sprite2","classId":1,"equips":[1,1,2,3,0],"faceIndex":5,"faceName":"Actor1","traits":[],"initialLevel":1,"maxLevel":99,"name":"Jomjemel","nickname":"","note":"","profile":""}
+{"id":1,"battlerName":"Actor1_6","characterIndex":0,"characterName":"!Sprite2","classId":1,"equips":[],"faceIndex":5,"faceName":"Actor1","traits":[],"initialLevel":1,"maxLevel":99,"name":"You","nickname":"","note":"","profile":""}
 ]
