@@ -1,9 +1,9 @@
 [
 null,
 null,
-null,
-{"id":3,"expanded":true,"name":"SideScroller Test 1","order":1,"parentId":0,"scrollX":817,"scrollY":463},
-{"id":4,"expanded":true,"name":"MAP2_EmptyRoom","order":2,"parentId":3,"scrollX":2835,"scrollY":463},
-{"id":5,"expanded":true,"name":"MAP3_Beatemup Sidescroller","order":3,"parentId":3,"scrollX":832,"scrollY":463},
-{"id":6,"expanded":true,"name":"GAME START","order":4,"parentId":0,"scrollX":817,"scrollY":471}
+{"id":2,"expanded":true,"name":"lIGHTHOUSE (INT) - act 1","order":3,"parentId":3,"scrollX":832,"scrollY":463},
+{"id":3,"expanded":true,"name":"BRIDGE - prologue","order":1,"parentId":0,"scrollX":817,"scrollY":463},
+{"id":4,"expanded":true,"name":"lIGHTHOUSE (EXT) - act 1","order":2,"parentId":3,"scrollX":2527,"scrollY":463},
+{"id":5,"expanded":true,"name":"PROLOGUE - BRIDGE","order":4,"parentId":3,"scrollX":832,"scrollY":624},
+{"id":6,"expanded":true,"name":"START OF GAME","order":5,"parentId":5,"scrollX":817,"scrollY":471}
 ]
