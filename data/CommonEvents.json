@@ -1,7 +1,7 @@
 [
 null,
 {"id":1,"list":[{"code":122,"indent":0,"parameters":[2,2,0,0,1]},{"code":231,"indent":0,"parameters":[2,"Rubbish",0,0,24,24,100,100,255,0]},{"code":250,"indent":0,"parameters":[{"name":"Equip2","volume":20,"pitch":150,"pan":0}]},{"code":0,"indent":0,"parameters":[]}],"name":"Lamp","switchId":1,"trigger":0},
-{"id":2,"list":[{"code":0,"indent":0,"parameters":[]}],"name":"","switchId":1,"trigger":0},
+{"id":2,"list":[{"code":122,"indent":0,"parameters":[2,2,0,0,2]},{"code":231,"indent":0,"parameters":[2,"Small Key",0,0,24,24,100,100,255,0]},{"code":250,"indent":0,"parameters":[{"name":"Equip2","volume":20,"pitch":150,"pan":0}]},{"code":0,"indent":0,"parameters":[]}],"name":"Rosary","switchId":1,"trigger":0},
 {"id":3,"list":[{"code":0,"indent":0,"parameters":[]}],"name":"","switchId":1,"trigger":0},
 {"id":4,"list":[{"code":0,"indent":0,"parameters":[]}],"name":"","switchId":1,"trigger":0},
 {"id":5,"list":[{"code":0,"indent":0,"parameters":[]}],"name":"","switchId":1,"trigger":0},

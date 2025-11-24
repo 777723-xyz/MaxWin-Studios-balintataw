@@ -1,17 +1,19 @@
 /*:
- * @plugindesc Simple centered menu + Arisu item screen fix + Item Box + Description fix.
+ * @plugindesc Simple custom menu for balintataw game
+ * @author John Paul Fusin
  */
 
 (function () {
   //===========================================================================
   // MENU (centered, no actors, no gold)
   //===========================================================================
-  Window_Base.prototype.normalColor = function () {
-    return '#FFFFFF'; // white text
-  };
 
+  // global white text (optional, matches your UI)
+  Window_Base.prototype.normalColor = function () {
+    return '#FFFFFF';
+  };
   Window_Base.prototype.systemColor = function () {
-    return '#FFFFFF'; // white for system text too
+    return '#FFFFFF';
   };
 
   const _SM_Menu_createStatusWindow = Scene_Menu.prototype.createStatusWindow;
@@ -55,7 +57,7 @@
   };
 
   //===========================================================================
-  // SCENE ITEM (no categories, PS1-style help window)
+  // SCENE ITEM (no visible categories, PS1-style help window)
   //===========================================================================
 
   Scene_Item._lastIndex = 0;
@@ -72,27 +74,35 @@
     win.createContents();
   };
 
-  // keep category window logic intact but hide it visually
   const _SM_Item_create = Scene_Item.prototype.create;
   Scene_Item.prototype.create = function () {
     _SM_Item_create.call(this);
 
+    // hide category window but still let Arisu / default logic use it
     if (this._categoryWindow) {
-      this._categoryWindow.selectSymbol('item');
+      this._categoryWindow.selectSymbol('item'); // default to Items
       this._categoryWindow.deactivate();
       this._categoryWindow.hide();
     }
 
+    // focus item window and bind help
     if (this._itemWindow) {
       let idx = Scene_Item._lastIndex || 0;
       if (idx >= this._itemWindow.maxItems()) idx = 0;
+      this._itemWindow.setHelpWindow(this._helpWindow);
       this._itemWindow.activate();
       this._itemWindow.select(idx);
-      this._itemWindow.setHelpWindow(this._helpWindow);
     }
   };
 
-  const _SM_Item_onItemCancel = Scene_Item.prototype.onItemCancel;
+/*************  ✨ Windsurf Command ⭐  *************/
+/**
+ * Called when the cancel button is pressed in the item scene.
+ * This function will remember the last selected index in the item window
+ * and then pop the current scene from the scene stack.
+ * @memberof Scene_Item
+ */
+/*******  2a3d2909-7b31-4223-abc3-65d74cd2c0c5  *******/
   Scene_Item.prototype.onItemCancel = function () {
     if (this._itemWindow) {
       Scene_Item._lastIndex = this._itemWindow.index();
@@ -101,17 +111,20 @@
   };
 
   //===========================================================================
-  // SHOW ITEMS + KEY ITEMS IN SAME LIST
+  // SHOW ITEMS + KEY ITEMS IN SAME LIST (for category "item")
   //===========================================================================
 
   const _SM_Item_includes = Window_ItemList.prototype.includes;
   Window_ItemList.prototype.includes = function (item) {
-    if (SceneManager._scene instanceof Scene_Item) {
+    if (
+      SceneManager._scene instanceof Scene_Item &&
+      this._category === 'item'
+    ) {
       return (
         item &&
         DataManager.isItem(item) &&
         (item.itypeId === 1 || item.itypeId === 2)
-      ); // item + key item
+      );
     }
     return _SM_Item_includes.call(this, item);
   };
@@ -126,39 +139,22 @@
   Window_ItemList.prototype.drawItemNumber = function () {};
 
   //===========================================================================
-  // ITEM BOX PNG (safe Arisu hook)
+  // LIVE DESCRIPTION + NAME UPDATE (no confirm needed)
   //===========================================================================
+
+  const _SM_ItemList_select = Window_ItemList.prototype.select;
+  Window_ItemList.prototype.select = function (index) {
+    _SM_ItemList_select.call(this, index);
+    // calling updateHelp() will trigger Arisu's name-window logic too
+    this.updateHelp();
+  };
+
+  // keep Arisu's updateHelp, just ensure helpWindow is updated
+  const _SM_updateHelp = Window_ItemList.prototype.updateHelp;
+  Window_ItemList.prototype.updateHelp = function () {
+    _SM_updateHelp.call(this); // Arisu already calls helpWindow + name window
+    if (this._helpWindow) {
+      this._helpWindow.setItem(this.item());
+    }
+  };
 })();
-
-// Force item description to update immediately on selection
-const _SM_ItemList_select = Window_ItemList.prototype.select;
-Window_ItemList.prototype.select = function (index) {
-  _SM_ItemList_select.call(this, index);
-  if (this._helpWindow) {
-    const item = this.item();
-    this._helpWindow.setItem(item);
-  }
-};
-
-// Update help whenever cursor moves
-Window_ItemList.prototype.updateHelp = function () {
-  if (this._helpWindow) {
-    this._helpWindow.setItem(this.item());
-  }
-};
-
-// Item name in the small brown label updates instantly
-const _SM_ItemList_drawItemName = Window_ItemList.prototype.drawItemName;
-Window_ItemList.prototype.drawItemName = function (item, x, y, width) {
-  this.changeTextColor('#FFFFFF'); // white name
-  _SM_ItemList_drawItemName.call(this, item, x, y, width);
-};
-
-// LIVE UPDATE name label (brown rectangle)
-const _SM_updateHelp = Window_ItemList.prototype.updateHelp;
-Window_ItemList.prototype.updateHelp = function () {
-  _SM_updateHelp.call(this);
-  if (this._ArisuItemNameWindow) {
-    this._ArisuItemNameWindow.setItem(this.item());
-  }
-};
