@@ -95,14 +95,12 @@
     }
   };
 
-/*************  ✨ Windsurf Command ⭐  *************/
-/**
- * Called when the cancel button is pressed in the item scene.
- * This function will remember the last selected index in the item window
- * and then pop the current scene from the scene stack.
- * @memberof Scene_Item
- */
-/*******  2a3d2909-7b31-4223-abc3-65d74cd2c0c5  *******/
+  /**
+   * Called when the cancel button is pressed in the item scene.
+   * This function will remember the last selected index in the item window
+   * and then pop the current scene from the scene stack.
+   * @memberof Scene_Item
+   */
   Scene_Item.prototype.onItemCancel = function () {
     if (this._itemWindow) {
       Scene_Item._lastIndex = this._itemWindow.index();

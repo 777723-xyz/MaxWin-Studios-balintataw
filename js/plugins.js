@@ -45,7 +45,7 @@ var $plugins =
 {"name":"SimpleNoF5","status":true,"description":"","parameters":{}},
 {"name":"SRD_FullscreenToggleOption","status":true,"description":"Adds a Fullscreen Toggle to the Options Window","parameters":{"Option Name":"Fullscreen","Position":"Bottom","Default Value":"true","Persist Default?":"false"}},
 {"name":"Arisu_VisualItemInventory","status":true,"description":"<VisualItemInventory> created by Arisu's Dollhouse","parameters":{"Settings":"","AntiAliasIcons":"true","ShowPicture":"true","AntiAliasPicture":"true","AffectedScenes":"","Scene_Item":"true","Scene_Equip":"true","Scene_Shop":"true","Scene_Battle":"false","CellSize":"","CellWidth":"120","CellHeight":"120","CellColors":"","ConsumbleItemBgColor":"rgba(141, 198, 63, 0.5)","UnusableItemBgColor":"rgba(183, 183, 183, 0.5)","KeyItemBgColor":"rgba(60, 80, 90, 0.5)","WeaponBgColor":"rgba(237, 28, 36, 0.5)","ArmorBgColor":"rgba(109, 207, 246, 0.5)","NameWindow":"","FontSize":"48"}},
-{"name":"SimpleMenu","status":true,"description":"Simple centered menu + Arisu item screen fix + Item Box + Description fix.","parameters":{}},
+{"name":"SimpleMenu","status":true,"description":"Simple custom menu w/ Arisu compatibility + live descriptions + map item box overlay","parameters":{}},
 {"name":"FPSLimit","status":true,"description":"Limits game refresh rate","parameters":{"FPS Limit":"60"}},
 {"name":"MOG_Credits","status":false,"description":"(v1.1) Adiciona a cena de créditos na tela de título.","parameters":{"Command Name":"Credits","Scrolling Speed":"1"}},
 {"name":"CTB_ExitCommand","status":true,"description":"v1.20 CT_Bolt's ExitCommand Plugin","parameters":{"Exit Game Text":"Exit Game","Add To Title Screen":"true","Add To GameEnd Screen":"true","titlePos":"","gameEndPos":""}}
