@@ -2,7 +2,7 @@
 null,
 {"id":1,"expanded":true,"name":"CHURCH (ACT3)","order":14,"parentId":0,"scrollX":819,"scrollY":469},
 {"id":2,"expanded":true,"name":"SHRINE OF FOUR KINGS (ACT 4)","order":17,"parentId":10,"scrollX":819,"scrollY":469},
-{"id":3,"expanded":true,"name":"BRIDGE (PROLOGUE)","order":1,"parentId":0,"scrollX":3008,"scrollY":624},
+{"id":3,"expanded":true,"name":"BRIDGE (PROLOGUE)","order":1,"parentId":0,"scrollX":3008,"scrollY":469},
 {"id":4,"expanded":false,"name":"CHALICE GAME (PUZZLE)","order":15,"parentId":1,"scrollX":819,"scrollY":477},
 {"id":5,"expanded":true,"name":"LIGHTHOUSE EXTERIOR (ACT1)","order":2,"parentId":0,"scrollX":3968,"scrollY":469},
 {"id":6,"expanded":true,"name":"START OF GAME","order":19,"parentId":0,"scrollX":832,"scrollY":640},
