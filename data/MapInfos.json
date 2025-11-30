@@ -132,8 +132,8 @@
     "name": "LIGHTHOUSE INTERIOR DOOR GAME (4) (ACT 1)",
     "order": 10,
     "parentId": 5,
-    "scrollX": 832,
-    "scrollY": 640
+    "scrollX": 819,
+    "scrollY": 477
   },
   {
     "id": 16,
@@ -159,7 +159,7 @@
     "name": "SPANISH FRIARS (FLASHBACK)",
     "order": 12,
     "parentId": 15,
-    "scrollX": 7341,
+    "scrollX": 7328,
     "scrollY": 469
   },
   {
@@ -169,7 +169,7 @@
     "order": 13,
     "parentId": 15,
     "scrollX": 7328,
-    "scrollY": 624
+    "scrollY": 469
   },
   {
     "id": 20,

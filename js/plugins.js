@@ -77,7 +77,7 @@ var $plugins = [
   },
   {
     name: 'BlinkDetector',
-    status: false,
+    status: true,
     description: 'Blink Detection v1.2',
     parameters: {
       'HUD Position': 'Top-Left',
@@ -89,7 +89,7 @@ var $plugins = [
   },
   {
     name: 'AutoConsole',
-    status: true,
+    status: false,
     description: 'Automatically opens NW.js developer console on playtest.',
     parameters: {},
   },
@@ -273,8 +273,8 @@ var $plugins = [
       '-- Terrain Step SE --': '',
       'Terrain 1': 'Footstep2,20,140',
       'Terrain 2': 'Wood Step,30,50',
-      'Terrain 3': 'grass,20,100',
-      'Terrain 4': 'Footstep1,20,100',
+      'Terrain 3': 'Footstep1,20,100',
+      'Terrain 4': '',
       'Terrain 5': '',
       'Terrain 6': '',
       'Terrain 7': '',
